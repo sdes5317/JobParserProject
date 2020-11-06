@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using AutoMapper;
+using JobParser.Core;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
@@ -11,12 +13,22 @@ namespace JobParser
     public class Worker : BackgroundService
     {
         private readonly ILogger<Worker> _logger;
-        private readonly int Interval;
+        private readonly ParserService _parserService;
+        private readonly RemoteRepository _remoteRepository;
+        private readonly IMapper _mapper;
+        private readonly int _interval;
 
-        public Worker(ILogger<Worker> logger)
+        public Worker(
+            ILogger<Worker> logger, 
+            ParserService parserService,
+            RemoteRepository remoteRepository,
+            IMapper mapper)
         {
             _logger = logger;
-            Interval = 2 * 60 * 60 * 1000;//2 Hour * 60 Min * 60 Sec * 1000Ms
+            _parserService = parserService;
+            _remoteRepository = remoteRepository;
+            _mapper = mapper;
+            _interval = 2 * 60 * 60 * 1000;//2 Hour * 60 Min * 60 Sec * 1000Ms
         }
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
@@ -25,9 +37,37 @@ namespace JobParser
             {
                 _logger.LogInformation("Worker running at: {time}", DateTimeOffset.Now);
 
+                try
+                {
+                    await _parserService.InitBrowser();
+                    await _parserService.GetJobPageElement();
+                    var jobElements = (await _parserService.GetJobElement()).ToList();
+                    var companyElements = (await _parserService.GetCompanyElement()).ToList();
+                    var areaElements = (await _parserService.GetAreaElement()).ToList();
 
+                    var jobDtos = new List<JobDto>();
+                    for (int i = 0; i < jobElements.Count(); i++)
+                    {
+                        var detail = new JobDto();
+                        _mapper.Map(jobElements[i], detail);
+                        _mapper.Map(companyElements[i], detail);
+                        _mapper.Map(areaElements[i], detail);
+                        jobDtos.Add(detail);
+                    }
 
-                await Task.Delay(Interval, stoppingToken);
+                    await _remoteRepository.SendNewJobs(jobDtos);
+                }
+                catch(Exception e)
+                {
+                    _logger.LogError("Worker Get Error at {time}", DateTimeOffset.Now);
+                    _logger.LogError(e.ToString());
+                }
+                finally
+                {
+                    await _parserService.CloseAsync();
+                }
+
+                await Task.Delay(_interval, stoppingToken);
             }
         }
     }
