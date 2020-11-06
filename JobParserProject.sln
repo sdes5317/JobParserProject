@@ -1,0 +1,52 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29613.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JobWebApi", "JobWebApi\JobWebApi.csproj", "{F54D550F-CD72-4DE6-9A8F-B15A09E25535}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JobParser", "JobParser\JobParser.csproj", "{F15CFEA6-CF3B-42EC-8E5F-B6934755BBB4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JobParser.Core", "JobParser.Core\JobParser.Core.csproj", "{5B4128CE-B7A0-446F-A016-E950BBC05DB2}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F54D550F-CD72-4DE6-9A8F-B15A09E25535}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F54D550F-CD72-4DE6-9A8F-B15A09E25535}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F54D550F-CD72-4DE6-9A8F-B15A09E25535}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F54D550F-CD72-4DE6-9A8F-B15A09E25535}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F15CFEA6-CF3B-42EC-8E5F-B6934755BBB4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F15CFEA6-CF3B-42EC-8E5F-B6934755BBB4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F15CFEA6-CF3B-42EC-8E5F-B6934755BBB4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F15CFEA6-CF3B-42EC-8E5F-B6934755BBB4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5B4128CE-B7A0-446F-A016-E950BBC05DB2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5B4128CE-B7A0-446F-A016-E950BBC05DB2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5B4128CE-B7A0-446F-A016-E950BBC05DB2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5B4128CE-B7A0-446F-A016-E950BBC05DB2}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {90114B67-4DAF-4641-A604-D03B328703B3}
+	EndGlobalSection
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 4
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://dev.azure.com/sdes5317
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = JobParser.Core\\JobParser.Core.csproj
+		SccProjectName1 = JobParser.Core
+		SccLocalPath1 = JobParser.Core
+		SccProjectUniqueName2 = JobParser\\JobParser.csproj
+		SccProjectName2 = JobParser
+		SccLocalPath2 = JobParser
+		SccProjectUniqueName3 = JobWebApi\\JobWebApi.csproj
+		SccProjectName3 = JobWebApi
+		SccLocalPath3 = JobWebApi
+	EndGlobalSection
+EndGlobal

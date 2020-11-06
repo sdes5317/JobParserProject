@@ -1,0 +1,7 @@
+/.vs
+/JobParser/bin
+/JobParser/obj
+/JobParser.Core/bin
+/JobParser.Core/obj
+/JobWebApi/bin
+/JobWebApi/obj
