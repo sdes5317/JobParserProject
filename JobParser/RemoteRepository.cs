@@ -19,8 +19,9 @@ namespace JobParser
 
         public async Task<HttpResponseMessage> SendNewJobs(IEnumerable<JobDto> jobDtos)
         {
+            var apiName = "Jobs/InsertPerson";
             var stringContext = new StringContent(JsonConvert.SerializeObject(jobDtos), Encoding.UTF8, "application/json");
-            return await HttpClient.PostAsync(Url, stringContext);
+            return await HttpClient.PostAsync(Url + apiName, stringContext);
         }
     }
 }

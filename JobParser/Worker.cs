@@ -36,10 +36,10 @@ namespace JobParser
             while (!stoppingToken.IsCancellationRequested)
             {
                 _logger.LogInformation("Worker running at: {time}", DateTimeOffset.Now);
-
                 try
                 {
                     await _parserService.InitBrowser();
+                    await _parserService.Login();
                     await _parserService.GetJobPageElement();
                     var jobElements = (await _parserService.GetJobElement()).ToList();
                     var companyElements = (await _parserService.GetCompanyElement()).ToList();
@@ -56,6 +56,8 @@ namespace JobParser
                     }
 
                     await _remoteRepository.SendNewJobs(jobDtos);
+
+                    _logger.LogInformation("Worker Finish at: {time}", DateTimeOffset.Now);
                 }
                 catch(Exception e)
                 {
@@ -64,7 +66,7 @@ namespace JobParser
                 }
                 finally
                 {
-                    await _parserService.CloseAsync();
+                    if(_parserService != null) await _parserService.CloseAsync();
                 }
 
                 await Task.Delay(_interval, stoppingToken);

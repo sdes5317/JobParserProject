@@ -5,3 +5,7 @@
 /JobParser.Core/obj
 /JobWebApi/bin
 /JobWebApi/obj
+/JobParser/appsettings.Production.json
+/JobWebApi/Properties
+/JobParser/appsettings.Development.json
+/JobParser/.local-chromium

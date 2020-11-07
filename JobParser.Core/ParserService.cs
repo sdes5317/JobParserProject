@@ -19,14 +19,31 @@ namespace JobParser.Core
 
         public async Task InitBrowser()
         {
+#if DEBUG
+            await DownloadBrowser();
             _browser = await Puppeteer.LaunchAsync(new LaunchOptions
             {
-                ExecutablePath= "/usr/bin/chromium-browser",
-                Headless = true
+                Headless = false,
             });
+#else
+            _browser = await Puppeteer.LaunchAsync(new LaunchOptions
+                        {
+            
+                            ExecutablePath = "/usr/bin/chromium-browser",
+                            Headless = true,
+                            Args = new[] { "--no-sandbox" }
+                        });
+#endif
+
         }
 
-        public async Task CloseAsync() => await _browser.CloseAsync();
+        public async Task CloseAsync()
+        {
+            if (_browser != null)
+            {
+                await _browser.CloseAsync();
+            }
+        }
         public async Task DownloadBrowser()
         {
             await new BrowserFetcher().DownloadAsync(BrowserFetcher.DefaultRevision);
