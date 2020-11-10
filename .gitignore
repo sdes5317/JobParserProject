@@ -9,3 +9,5 @@
 /JobWebApi/Properties
 /JobParser/appsettings.Development.json
 /JobParser/.local-chromium
+/JobWebApi/appsettings.Production.json
+/JobWebApi/appsettings.Development.json
