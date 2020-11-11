@@ -12,10 +12,13 @@
 
 ### 專案架構圖
 ```
-
-MySql(in Azure App Service) <----> JobWebApi(in Azure App Service) <----> JobParser(Service in Oracle Linux Vm)
-                                   ↘
-                          Line Notify Api(Offical) --->My Line App
+                                   JobParser(Service in Oracle Linux Vm)
+                                       ↑
+                                       ↓
+MySql(in Azure App Service) <----> JobWebApi(in Azure App Service) <----> 
+                                       ↑
+                                       ↓
+                                   Line Notify Api(Offical) --->My Line App
                           
 ```
 
