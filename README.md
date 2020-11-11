@@ -15,7 +15,7 @@
                                    JobParser(Service in Oracle Linux Vm)
                                        ↑
                                        ↓
-MySql(in Azure App Service) <----> JobWebApi(in Azure App Service) <----> 
+MySql(in Azure App Service) <----> JobWebApi(in Azure App Service)
                                        ↑
                                        ↓
                                    Line Notify Api(Offical) --->My Line App
