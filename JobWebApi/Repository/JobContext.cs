@@ -15,15 +15,7 @@ namespace JobWebApi.Repository
 
         public JobContext()
         {
-            var rawConnectionString = Environment.GetEnvironmentVariable("MYSQLCONNSTR_localdb");
-            //We will get this
-            //Database=localdb;Data Source=127.0.0.1:50754;User Id=azure;Password=6#vWHD_$
-            //Need change to this 
-            //"Server=127.0.0.1; Port=50726; Database=localdb; Uid=azure; Pwd=6#vWHD_$; Character Set=utf8"
-            _connectionString = rawConnectionString
-                .Replace("Data Source=127.0.0.1:", "Port=")
-                .Replace("User Id", "Uid")
-                .Replace("Password", "Pwd") + ";Server=127.0.0.1; Character Set=utf8";
+            _connectionString = GetMySqlConnectionString();
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder options)
