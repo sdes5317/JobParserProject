@@ -17,3 +17,6 @@
 6. 取得發行設定檔並設定到VS2019
    Azure App Service>概觀>取得發行設定檔
 7. 編譯JobWebApi專案並發行
+
+### 參考資料
+* [如何將應用程式連線至適用於 MySQL 的 Azure 資料庫](https://docs.microsoft.com/zh-tw/azure////mysql/howto-connection-string)
