@@ -17,13 +17,13 @@ namespace JobParser
             Url = url;
         }
 
-        public async Task<HttpResponseMessage> UpdateNewJobs(IEnumerable<JobDto> jobDtos)
+        public async Task<HttpResponseMessage> UpdateNewJobsAsync(IEnumerable<JobDto> jobDtos)
         {
             var apiName = "Jobs/InsertJobs";
             var stringContext = new StringContent(JsonConvert.SerializeObject(jobDtos), Encoding.UTF8, "application/json");
             return await HttpClient.PostAsync(Url + apiName, stringContext);
         }
-        public async Task<HttpResponseMessage> PublishYesterdayJobToUser()
+        public async Task<HttpResponseMessage> PublishYesterdayJobToUserAsync()
         {
             var apiName = "Jobs/PublishYesterdayJobToUser";
             return await HttpClient.GetAsync(Url + apiName);

@@ -17,7 +17,7 @@ namespace JobParser.Core
             _loginPassword = loginPassword;
         }
 
-        public async Task InitBrowser()
+        public async Task InitBrowserAsync()
         {
 #if DEBUG
             await DownloadBrowser();
@@ -49,7 +49,7 @@ namespace JobParser.Core
             await new BrowserFetcher().DownloadAsync(BrowserFetcher.DefaultRevision);
         }
 
-        public async Task Login()
+        public async Task LoginAsync()
         {
             var page = await _browser.NewPageAsync();
             await page.SetViewportAsync(new ViewPortOptions());
@@ -62,14 +62,14 @@ namespace JobParser.Core
             await page.CloseAsync();
         }
 
-        public async Task GetJobPageElement()
+        public async Task GetJobPageElementAsync()
         {
             _page = await _browser.NewPageAsync();
             await _page.SetViewportAsync(new ViewPortOptions());
             await _page.GoToAsync("https://pda.104.com.tw/my104/mate/list?itemNo=x2&u=qj9dzg");
         }
 
-        public async Task<IEnumerable<JobElement>> GetJobElement()
+        public async Task<IEnumerable<JobElement>> GetJobElementAsync()
         {
             var element = await _page.QuerySelectorAllAsync(".joblist_cont .jobname_1");
             var jobElements = new List<JobElement>();
@@ -85,7 +85,7 @@ namespace JobParser.Core
             return jobElements;
         }
 
-        public async Task<IEnumerable<CompanyElement>> GetCompanyElement()
+        public async Task<IEnumerable<CompanyElement>> GetCompanyElementAsync()
         {
             var element = await _page.QuerySelectorAllAsync(".joblist_cont .compname_1");
             var jobElements = new List<CompanyElement>();
@@ -100,7 +100,7 @@ namespace JobParser.Core
             return jobElements;
         }
 
-        public async Task<IEnumerable<AreaElement>> GetAreaElement()
+        public async Task<IEnumerable<AreaElement>> GetAreaElementAsync()
         {
             var element = await _page.QuerySelectorAllAsync(".joblist_cont .area");
             var jobElements = new List<AreaElement>();

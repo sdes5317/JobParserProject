@@ -40,10 +40,10 @@ namespace JobParser
                 try
                 {
                     //todo 使用排程器套件重構
-                    _logger.LogInformation(nameof(FindNewJobTask));
-                    await FindNewJobTask();
-                    _logger.LogInformation(nameof(PublishJobsTask));
-                    await PublishJobsTask();
+                    _logger.LogInformation(nameof(FindNewJobTaskAsync));
+                    await FindNewJobTaskAsync();
+                    _logger.LogInformation(nameof(PublishJobsTaskAsync));
+                    await PublishJobsTaskAsync();
 
                     _logger.LogInformation("Worker Finish");
                 }
@@ -64,23 +64,23 @@ namespace JobParser
         /// 每天早上定時發送新職缺訊息
         /// </summary>
         /// <returns></returns>
-        private async Task PublishJobsTask()
+        private async Task PublishJobsTaskAsync()
         {
             if (_lastPublishTime is null || _lastPublishTime.Value.Date != DateTime.Today)
             {
-                await _remoteRepository.PublishYesterdayJobToUser();
+                await _remoteRepository.PublishYesterdayJobToUserAsync();
                 _lastPublishTime = DateTime.Today;
             }
         }
 
-        private async Task FindNewJobTask()
+        private async Task FindNewJobTaskAsync()
         {
-            await _parserService.InitBrowser();
-            await _parserService.Login();
-            await _parserService.GetJobPageElement();
-            var jobElements = (await _parserService.GetJobElement()).ToList();
-            var companyElements = (await _parserService.GetCompanyElement()).ToList();
-            var areaElements = (await _parserService.GetAreaElement()).ToList();
+            await _parserService.InitBrowserAsync();
+            await _parserService.LoginAsync();
+            await _parserService.GetJobPageElementAsync();
+            var jobElements = (await _parserService.GetJobElementAsync()).ToList();
+            var companyElements = (await _parserService.GetCompanyElementAsync()).ToList();
+            var areaElements = (await _parserService.GetAreaElementAsync()).ToList();
 
             var jobDtos = new List<JobDto>();
             for (int i = 0; i < jobElements.Count(); i++)
@@ -92,7 +92,7 @@ namespace JobParser
                 jobDtos.Add(detail);
             }
 
-            await _remoteRepository.UpdateNewJobs(jobDtos);
+            await _remoteRepository.UpdateNewJobsAsync(jobDtos);
         }
     }
 }
