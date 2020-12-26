@@ -51,3 +51,4 @@ MySql(in Azure App Service) <----> JobWebApi(in Azure App Service)
 1. 使用排程器套件重構排程
 2. 把Line發送功能抽成模組	
 3. 針對發送的訊息進行排版	
+4. 解決Line Notify單次訊息只能傳1000字的問題
