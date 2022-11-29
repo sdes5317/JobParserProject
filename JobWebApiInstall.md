@@ -1,4 +1,5 @@
 # JobWebApi Install
+**In Azure Console**
 1. 建立一個App Service
 2. 開啟#MySQL In App#
 3. 檢查**連接字串的環境變數**是否跟[程式碼裡](JobWebApi/Repository/JobContext.cs#L37)的一致，透過這個環境變數可取得SqlConnectionString(參考備註1)
